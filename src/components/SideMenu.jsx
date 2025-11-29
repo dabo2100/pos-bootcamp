@@ -1,9 +1,16 @@
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import Logo from '../assets/Untitled design.png';
 
 export default function SideMenu() {
+  const navigate = useNavigate();
+  const handleLogout = () => {
+    sessionStorage.removeItem('token');
+    localStorage.removeItem('token');
+    navigate('/login');
+  };
+
   return (
-    <div className="w-[250px] h-dvh overflow-hidden bg-white border-r border-r-gray-50">
+    <div className="w-[300px] h-dvh overflow-hidden bg-white border-r border-r-gray-50">
       <div className="w-full flex justify-center">
         <img src={Logo} />
       </div>
@@ -21,8 +28,10 @@ export default function SideMenu() {
           Invoices
         </NavLink>
       </div>
+
+      <button className="btn btn-error" onClick={handleLogout}>
+        Logout
+      </button>
     </div>
   );
 }
-
-// "hover:bg-yellow p-3 rounded"

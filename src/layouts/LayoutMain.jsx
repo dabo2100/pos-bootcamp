@@ -1,7 +1,17 @@
-import { Outlet } from 'react-router-dom';
+import { Outlet, useNavigate } from 'react-router-dom';
 import SideMenu from '../components/SideMenu';
+import { useEffect } from 'react';
 
 export default function LayoutMain() {
+  const navigate = useNavigate();
+  // Protection For Route
+  useEffect(() => {
+    let token = localStorage.getItem('token') || sessionStorage.getItem('token');
+    if (!token) {
+      navigate('/login');
+    }
+  }, []);
+
   return (
     <div className="w-full flex">
       <SideMenu />
